@@ -7,6 +7,15 @@
 #include <Camera/CameraComponent.h>
 #include "unreal_project_1Character.generated.h"
 
+UENUM(BlueprintType)
+enum class StateOfCharacterCPP : uint8
+{
+	Idle,
+	Aiming,
+	Reloading,
+	Swapping,
+	Running,
+};
 
 UCLASS()
 class Aunreal_project_1Character : public ACharacter
@@ -27,6 +36,19 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+protected:
+	UPROPERTY(Category = Character, VisibleAnywhere, BlueprintReadWrite)
+	StateOfCharacterCPP StateCPP;
+
+	UPROPERTY(Category = Character, VisibleAnywhere, BlueprintReadWrite)
+	bool IsRunPressedCPP;
+
+	UPROPERTY(Category = Character, VisibleAnywhere, BlueprintReadWrite)
+	float MoveForwardValueCPP;
+
+	UPROPERTY(Category = Character, EditAnywhere, BlueprintReadWrite)
+	TObjectPtr<USoundBase> FootstepLeftSoundCPP;
 
 private:
 	//uproperty 에디터에서 어떻게 보여줄것인가
