@@ -42,6 +42,37 @@ Aunreal_project_1Character::Aunreal_project_1Character()
 	}
 }
 
+float Aunreal_project_1Character::GetSpeedCPP() const
+{
+	return GetVelocity().Length();
+}
+
+bool Aunreal_project_1Character::CanRunCPP() const
+{
+	return (MoveForwardValueCPP > 0.0) && IsRunPressedCPP;
+}
+
+void Aunreal_project_1Character::TickRunCPP()
+{
+	if (CanRunCPP()) 
+	{
+		switch (StateCPP)
+		{
+		case StateOfCharacterCPP::Idle:
+			StateCPP = StateOfCharacterCPP::Running;
+		}
+	}
+	else
+	{
+		switch (StateCPP)
+		{
+		case StateOfCharacterCPP::Running:
+			StateCPP = StateOfCharacterCPP::Idle;
+		}
+		
+	}
+}
+
 // Called when the game starts or when spawned
 void Aunreal_project_1Character::BeginPlay()
 {

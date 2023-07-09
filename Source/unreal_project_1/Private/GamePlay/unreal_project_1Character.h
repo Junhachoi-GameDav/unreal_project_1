@@ -26,6 +26,15 @@ public:
 	// Sets default values for this character's properties
 	Aunreal_project_1Character();
 
+	//const 가 붙으면 불값등을 수정할수 없다. and pure가 자동으로 된다. const가 없으면 bluepinrtpure를 넣어줘야한다.
+	UFUNCTION(BlueprintCallable)
+	virtual float GetSpeedCPP() const;
+	UFUNCTION(BlueprintCallable)
+	virtual bool CanRunCPP() const;
+
+	UFUNCTION(BlueprintCallable)
+	virtual void TickRunCPP();
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
