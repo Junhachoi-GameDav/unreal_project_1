@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include <Camera/CameraComponent.h>
+#include <InputAction.h>
 #include "unreal_project_1Character.generated.h"
 
 UENUM(BlueprintType)
@@ -26,7 +27,8 @@ public:
 	// Sets default values for this character's properties
 	Aunreal_project_1Character();
 
-	//const 가 붙으면 불값등을 수정할수 없다. and pure가 자동으로 된다. const가 없으면 bluepinrtpure를 넣어줘야한다.
+	//const 가 붙으면 불값등을 수정할수 없다. and pure가 자동으로 된다. 
+	//const가 없으면 bluepinrtpure를 넣어줘야한다.(pure를 사용하고 싶을시)
 	UFUNCTION(BlueprintCallable)
 	virtual float GetSpeedCPP() const;
 	UFUNCTION(BlueprintCallable)
@@ -35,9 +37,14 @@ public:
 	UFUNCTION(BlueprintCallable)
 	virtual void TickRunCPP();
 
+	UFUNCTION(BlueprintCallable)
+	virtual void OnFootstepLeftCPP();
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
+	virtual void OnTriggerRun(const FInputActionValue& Value);
 
 public:	
 	// Called every frame
@@ -58,6 +65,9 @@ protected:
 
 	UPROPERTY(Category = Character, EditAnywhere, BlueprintReadWrite)
 	TObjectPtr<USoundBase> FootstepLeftSoundCPP;
+
+	UPROPERTY(Category = Character, EditAnywhere, BlueprintReadWrite)
+	TObjectPtr<UInputAction> RunInputAction;
 
 private:
 	//uproperty 에디터에서 어떻게 보여줄것인가

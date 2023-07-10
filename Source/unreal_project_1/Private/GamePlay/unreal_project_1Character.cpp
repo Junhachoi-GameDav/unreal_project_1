@@ -1,7 +1,10 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
+//다른 모듈에서 가져올땐 <>
 #include "GamePlay/unreal_project_1Character.h"
+#include <GameFramework/CharacterMovementComponent.h>
+#include <Kismet/GameplayStatics.h>
+#include <EnhancedInputComponent.h>
 
 // Sets default values
 Aunreal_project_1Character::Aunreal_project_1Character()
@@ -60,6 +63,7 @@ void Aunreal_project_1Character::TickRunCPP()
 		{
 		case StateOfCharacterCPP::Idle:
 			StateCPP = StateOfCharacterCPP::Running;
+			GetCharacterMovement()->MaxWalkSpeed *=2.0;
 		}
 	}
 	else
@@ -68,9 +72,15 @@ void Aunreal_project_1Character::TickRunCPP()
 		{
 		case StateOfCharacterCPP::Running:
 			StateCPP = StateOfCharacterCPP::Idle;
+			GetCharacterMovement()->MaxWalkSpeed *= 0.5;
 		}
 		
 	}
+}
+
+void Aunreal_project_1Character::OnFootstepLeftCPP()
+{
+	UGameplayStatics::PlaySoundAtLocation(this, FootstepLeftSoundCPP, LowerBodyCPP->GetSocketLocation("foot_l"));
 }
 
 // Called when the game starts or when spawned
@@ -78,6 +88,11 @@ void Aunreal_project_1Character::BeginPlay()
 {
 	Super::BeginPlay();
 	
+}
+
+void Aunreal_project_1Character::OnTriggerRun(const FInputActionValue& Value)
+{
+	IsRunPressedCPP = Value.Get<bool>();
 }
 
 // Called every frame
@@ -91,6 +106,9 @@ void Aunreal_project_1Character::Tick(float DeltaTime)
 void Aunreal_project_1Character::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
+	if (UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(PlayerInputComponent))
+	{
+		EnhancedInputComponent->BindAction(RunInputAction, ETriggerEvent::Triggered, this, &Aunreal_project_1Character::OnTriggerRun);
+	}
 }
 
