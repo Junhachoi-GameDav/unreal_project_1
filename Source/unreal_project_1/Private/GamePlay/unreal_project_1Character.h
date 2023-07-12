@@ -30,15 +30,15 @@ public:
 	//const 가 붙으면 불값등을 수정할수 없다. and pure가 자동으로 된다. 
 	//const가 없으면 bluepinrtpure를 넣어줘야한다.(pure를 사용하고 싶을시)
 	UFUNCTION(BlueprintCallable)
-	virtual float GetSpeedCPP() const;
+		virtual float GetSpeedCPP() const;
 	UFUNCTION(BlueprintCallable)
-	virtual bool CanRunCPP() const;
+		virtual bool CanRunCPP() const;
 
 	UFUNCTION(BlueprintCallable)
-	virtual void TickRunCPP();
+		virtual void TickRunCPP();
 
 	UFUNCTION(BlueprintCallable)
-	virtual void OnFootstepLeftCPP();
+		virtual void OnFootstepLeftCPP();
 
 protected:
 	// Called when the game starts or when spawned
@@ -46,7 +46,7 @@ protected:
 
 	virtual void OnTriggerRun(const FInputActionValue& Value);
 
-public:	
+public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
@@ -55,38 +55,38 @@ public:
 
 protected:
 	UPROPERTY(Category = Character, VisibleAnywhere, BlueprintReadWrite)
-	StateOfCharacterCPP StateCPP;
+		StateOfCharacterCPP StateCPP;
 
 	UPROPERTY(Category = Character, VisibleAnywhere, BlueprintReadWrite)
-	bool IsRunPressedCPP;
+		bool IsRunPressedCPP;
 
 	UPROPERTY(Category = Character, VisibleAnywhere, BlueprintReadWrite)
-	float MoveForwardValueCPP;
+		float MoveForwardValueCPP;
 
 	UPROPERTY(Category = Character, EditAnywhere, BlueprintReadWrite)
-	TObjectPtr<USoundBase> FootstepLeftSoundCPP;
+		TObjectPtr<USoundBase> FootstepLeftSoundCPP;
 
 	UPROPERTY(Category = Character, EditAnywhere, BlueprintReadWrite)
-	TObjectPtr<UInputAction> RunInputAction;
+		TObjectPtr<UInputAction> RunInputAction;
 
 private:
 	//uproperty 에디터에서 어떻게 보여줄것인가
 	UPROPERTY(Category = Character, VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
-	TObjectPtr<USkeletalMeshComponent> ShadowBodyCPP;
+		TObjectPtr<USkeletalMeshComponent> ShadowBodyCPP;
 
 	UPROPERTY(Category = Character, VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
-	TObjectPtr<UChildActorComponent> weapon_in_backCPP;
+		TObjectPtr<UChildActorComponent> weapon_in_backCPP;
 
 	UPROPERTY(Category = Character, VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
-	TObjectPtr<USkeletalMeshComponent> LowerBodyCPP;
+		TObjectPtr<USkeletalMeshComponent> LowerBodyCPP;
 
 	UPROPERTY(Category = Character, VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
-	TObjectPtr<UCameraComponent> CameraCPP;
+		TObjectPtr<UCameraComponent> CameraCPP;
 
 	UPROPERTY(Category = Character, VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
-	TObjectPtr<USkeletalMeshComponent> first_personCPP;
+		TObjectPtr<USkeletalMeshComponent> first_personCPP;
 
 	UPROPERTY(Category = Character, VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
-	TObjectPtr<UChildActorComponent> weapon_in_handCPP;
+		TObjectPtr<UChildActorComponent> weapon_in_handCPP;
 
 };

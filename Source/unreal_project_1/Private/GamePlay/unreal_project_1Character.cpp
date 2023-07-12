@@ -9,7 +9,7 @@
 // Sets default values
 Aunreal_project_1Character::Aunreal_project_1Character()
 {
- 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
 	//if문으로 null오류를 막는 것
@@ -24,7 +24,7 @@ Aunreal_project_1Character::Aunreal_project_1Character()
 			weapon_in_backCPP->SetupAttachment(ShadowBodyCPP);
 		}
 	}
-	
+
 	LowerBodyCPP = CreateAbstractDefaultSubobject<USkeletalMeshComponent>(TEXT("LowerBodyCPP"));
 	LowerBodyCPP->SetupAttachment(RootComponent);
 
@@ -33,7 +33,7 @@ Aunreal_project_1Character::Aunreal_project_1Character()
 	{
 		CameraCPP->SetupAttachment(RootComponent);
 		first_personCPP = CreateAbstractDefaultSubobject<USkeletalMeshComponent>(TEXT("first_personCPP"));
-		if (first_personCPP) 
+		if (first_personCPP)
 		{
 			first_personCPP->SetupAttachment(CameraCPP);
 			weapon_in_handCPP = CreateAbstractDefaultSubobject<UChildActorComponent>(TEXT("weapon_in_handCPP"));
@@ -57,13 +57,13 @@ bool Aunreal_project_1Character::CanRunCPP() const
 
 void Aunreal_project_1Character::TickRunCPP()
 {
-	if (CanRunCPP()) 
+	if (CanRunCPP())
 	{
 		switch (StateCPP)
 		{
 		case StateOfCharacterCPP::Idle:
 			StateCPP = StateOfCharacterCPP::Running;
-			GetCharacterMovement()->MaxWalkSpeed *=2.0;
+			GetCharacterMovement()->MaxWalkSpeed *= 2.0;
 		}
 	}
 	else
@@ -74,7 +74,7 @@ void Aunreal_project_1Character::TickRunCPP()
 			StateCPP = StateOfCharacterCPP::Idle;
 			GetCharacterMovement()->MaxWalkSpeed *= 0.5;
 		}
-		
+
 	}
 }
 
@@ -87,7 +87,7 @@ void Aunreal_project_1Character::OnFootstepLeftCPP()
 void Aunreal_project_1Character::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
 }
 
 void Aunreal_project_1Character::OnTriggerRun(const FInputActionValue& Value)
@@ -111,4 +111,6 @@ void Aunreal_project_1Character::SetupPlayerInputComponent(UInputComponent* Play
 		EnhancedInputComponent->BindAction(RunInputAction, ETriggerEvent::Triggered, this, &Aunreal_project_1Character::OnTriggerRun);
 	}
 }
+
+
 
