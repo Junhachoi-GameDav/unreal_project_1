@@ -14,4 +14,11 @@ class Uunreal_project_1SaveGame : public USaveGame
 {
 	GENERATED_BODY()
 	
+public:
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	TArray<float> ScoreCPP;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	TArray<FString> TimesCPP;
 };
