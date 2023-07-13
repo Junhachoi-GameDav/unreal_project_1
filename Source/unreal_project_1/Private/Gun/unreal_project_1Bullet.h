@@ -15,6 +15,9 @@ public:
 	// Sets default values for this actor's properties
 	Aunreal_project_1Bullet();
 
+	UFUNCTION(BlueprintCallable)
+	void SetSpeedCPP(float Value);
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -25,6 +28,10 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+protected:
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	float SpeedCPP;
 
 private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))

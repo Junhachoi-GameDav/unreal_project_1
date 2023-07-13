@@ -16,6 +16,11 @@ Aunreal_project_1Bullet::Aunreal_project_1Bullet()
 	}
 }
 
+void Aunreal_project_1Bullet::SetSpeedCPP(float Value)
+{
+	SpeedCPP = Value;
+}
+
 // Called when the game starts or when spawned
 void Aunreal_project_1Bullet::BeginPlay()
 {
