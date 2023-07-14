@@ -11,6 +11,21 @@ Aunreal_project_1LaserPinter::Aunreal_project_1LaserPinter()
 
 }
 
+float Aunreal_project_1LaserPinter::GetEndPointOfLaserCPP(FVector Start, FVector End) const
+{
+	float distance = 0;
+	FHitResult Result;
+	if (GetWorld()->LineTraceSingleByChannel(Result, Start, End, ECollisionChannel::ECC_Visibility))
+	{
+		distance = Result.Distance;
+	}
+	else
+	{
+		distance = (End - Start).Length();
+	}
+	return distance;
+}
+
 // Called when the game starts or when spawned
 void Aunreal_project_1LaserPinter::BeginPlay()
 {
