@@ -26,3 +26,13 @@ void Aunreal_project_1GameMode::UpdateRankingCPP()
 		RankingTimesCPP.RemoveAt(RankingTimesCPP.Num() - 1);
 	}
 }
+
+StateOfGameCPP Aunreal_project_1GameMode::GetStateCPP() const
+{
+	return StateCPP;
+}
+
+FDateTime Aunreal_project_1GameMode::GetStartTimeCPP() const
+{
+	return StartTimeCPP;
+}

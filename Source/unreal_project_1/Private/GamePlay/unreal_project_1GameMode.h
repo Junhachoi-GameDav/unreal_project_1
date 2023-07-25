@@ -7,6 +7,15 @@
 #include "unreal_project_1GameMode.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_SPARSE_DELEGATE(Funreal_project_1GameModeOnEndGame, Aunreal_project_1GameMode, OnEndGameCPP);
+
+UENUM(BlueprintType)
+enum class StateOfGameCPP : uint8
+{
+	Ready,
+	Playing,
+	Ended,
+};
+
 /**
  *
  */
@@ -19,6 +28,12 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 		void UpdateRankingCPP();
+
+	UFUNCTION(BlueprintCallable)
+	StateOfGameCPP GetStateCPP() const;
+
+	UFUNCTION(BlueprintCallable)
+	FDateTime GetStartTimeCPP() const;
 
 public:
 
@@ -45,4 +60,7 @@ protected:
 
 	UPROPERTY(Category = GameMode, VisibleAnywhere, BlueprintReadWrite)
 		float ScoreCPP;
+
+	UPROPERTY(Category = GameMode, VisibleAnywhere, BlueprintReadWrite)
+	StateOfGameCPP StateCPP;
 };
