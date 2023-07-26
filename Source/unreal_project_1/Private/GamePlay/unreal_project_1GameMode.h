@@ -35,6 +35,14 @@ public:
 	UFUNCTION(BlueprintCallable)
 	FDateTime GetStartTimeCPP() const;
 
+	UFUNCTION(BlueprintCallable)
+	int32 GetRankingCPP() const;
+
+	UFUNCTION(BlueprintCallable)
+		TArray<float> GetRankingScoresCPP() const;
+
+	UFUNCTION(BlueprintCallable)
+		TArray<FString> GetRankingTimesCPP() const;
 public:
 
 	//델리게이트 = 이벤트 함수(on ~ bind 뭐시기들)

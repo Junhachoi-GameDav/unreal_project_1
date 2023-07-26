@@ -36,3 +36,18 @@ FDateTime Aunreal_project_1GameMode::GetStartTimeCPP() const
 {
 	return StartTimeCPP;
 }
+
+int32 Aunreal_project_1GameMode::GetRankingCPP() const
+{
+	return RankingCPP;
+}
+
+TArray<float> Aunreal_project_1GameMode::GetRankingScoresCPP() const
+{
+	return RankingScoresCPP;
+}
+
+TArray<FString> Aunreal_project_1GameMode::GetRankingTimesCPP() const
+{
+	return RankingTimesCPP;
+}
