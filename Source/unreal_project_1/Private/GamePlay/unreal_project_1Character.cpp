@@ -5,6 +5,7 @@
 #include <GameFramework/CharacterMovementComponent.h>
 #include <Kismet/GameplayStatics.h>
 #include <EnhancedInputComponent.h>
+#include <Settings/unreal_project_1UserSettings.h>
 
 // Sets default values
 Aunreal_project_1Character::Aunreal_project_1Character()
@@ -90,9 +91,46 @@ void Aunreal_project_1Character::BeginPlay()
 
 }
 
+void Aunreal_project_1Character::TickBrightness()
+{
+	float Brightness = 0.0;
+	Uunreal_project_1UserSettings* UserSettings = Cast<Uunreal_project_1UserSettings>(GEngine->GetGameUserSettings());
+	if (UserSettings)
+	{
+		Brightness = UserSettings->GetAutoExposureBrightness();
+	}
+	if (CameraCPP)
+	{
+		FPostProcessSettings Settings = CameraCPP->PostProcessSettings;
+		Settings.AutoExposureMinBrightness = Brightness;
+		Settings.AutoExposureMaxBrightness = Brightness;
+		CameraCPP->PostProcessSettings = Settings;
+	}
+}
+
 void Aunreal_project_1Character::OnTriggerRun(const FInputActionValue& Value)
 {
 	IsRunPressedCPP = Value.Get<bool>();
+}
+
+void Aunreal_project_1Character::OnTryggerTurnPitch(const FInputActionValue& Value)
+{
+	Uunreal_project_1UserSettings* UserSettings = Cast<Uunreal_project_1UserSettings>(GEngine->GetGameUserSettings());
+	if (UserSettings)
+	{
+		float Pitch = UserSettings->GetMouseSensitivity() * Value.Get<float>();
+		AddControllerPitchInput(Pitch);
+	}
+}
+
+void Aunreal_project_1Character::OnTryggerTurnYaw(const FInputActionValue& Value)
+{
+	Uunreal_project_1UserSettings* UserSettings = Cast<Uunreal_project_1UserSettings>(GEngine->GetGameUserSettings());
+	if (UserSettings)
+	{
+		float Yaw = UserSettings->GetMouseSensitivity() * Value.Get<float>();
+		AddControllerYawInput(Yaw);
+	}
 }
 
 // Called every frame
@@ -100,6 +138,7 @@ void Aunreal_project_1Character::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	TickBrightness();
 }
 
 // Called to bind functionality to input
@@ -109,6 +148,8 @@ void Aunreal_project_1Character::SetupPlayerInputComponent(UInputComponent* Play
 	if (UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(PlayerInputComponent))
 	{
 		EnhancedInputComponent->BindAction(RunInputAction, ETriggerEvent::Triggered, this, &Aunreal_project_1Character::OnTriggerRun);
+		EnhancedInputComponent->BindAction(TurnPitchInputAction, ETriggerEvent::Triggered, this, &Aunreal_project_1Character::OnTryggerTurnPitch);
+		EnhancedInputComponent->BindAction(TurnYawInputAction, ETriggerEvent::Triggered, this, &Aunreal_project_1Character::OnTryggerTurnYaw);
 	}
 }
 

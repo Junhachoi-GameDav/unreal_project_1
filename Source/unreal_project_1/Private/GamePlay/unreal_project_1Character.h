@@ -44,7 +44,11 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	virtual void TickBrightness();
+
 	virtual void OnTriggerRun(const FInputActionValue& Value);
+	virtual void OnTryggerTurnPitch(const FInputActionValue& Value);
+	virtual void OnTryggerTurnYaw(const FInputActionValue& Value);
 
 public:
 	// Called every frame
@@ -68,6 +72,12 @@ protected:
 
 	UPROPERTY(Category = Character, EditAnywhere, BlueprintReadWrite)
 		TObjectPtr<UInputAction> RunInputAction;
+
+	UPROPERTY(Category = Character, EditAnywhere, BlueprintReadWrite)
+		TObjectPtr<UInputAction> TurnPitchInputAction;
+
+	UPROPERTY(Category = Character, EditAnywhere, BlueprintReadWrite)
+		TObjectPtr<UInputAction> TurnYawInputAction;
 
 private:
 	//uproperty 에디터에서 어떻게 보여줄것인가
